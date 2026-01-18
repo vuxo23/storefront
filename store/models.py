@@ -9,14 +9,16 @@ class Collection(models.Model):
     featured_product = models.ForeignKey('Product', on_delete=models.SET_NULL, null= True, related_name='+' )
 
 
+
 class Product(models.Model):
-    title = models.CharField(max_length= 255)
-    slug = models.SlugField()
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(default="-")
     description = models.TextField()
-    unit_price = models.DecimalField(max_digits=6, decimal_places= 2)
+    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
     inventory = models.IntegerField()
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
+    # promotions = models.ManyToManyField(Promotion, related_name="products")
     promotions = models.ManyToManyField(Promotion)
 
 class Customer(models.Model):
@@ -35,11 +37,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length= 255)
     birth_date = models.DateField(null=True)
     membership = models.CharField(max_length=1, choices=MEMBERSHIP_CHOICES, default= MEMBERSHIP_Bronze)
-    class Meta:
-        db_table= 'store_customers'
-        indexes = [
-            models.Index(fields= ['last_name', 'first_name'])
-        ]
+
 
 class Order(models.Model):
     PAYMENT_Pending = 'P'
@@ -65,7 +63,6 @@ class OrderItem(models.Model):
 
 class Cart(models.Model):
     created_at= models.DateTimeField(auto_now=True)
-    quantity = models.PositiveSmallIntegerField()
 
 class CartItem(models.Model):
     quantity = models.PositiveSmallIntegerField()

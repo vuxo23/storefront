@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head>
-</head>
+<!DOCTYPE html>
+<html lang="en">
 <body>
-<h1>Hello World</h1>
-<h1> This is Vuxo</h1>
-
+    {% if name %}
+    <h1>Hello {{ name }}</h1>
+    {% else %}
+    <h1>Hello World</h1>
+    {% endif %}
 </body>
+
 </html>
