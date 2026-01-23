@@ -3,7 +3,6 @@ from django.db.models import Count
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from . import models
-from tags.models import TaggedItem 
 
 class InventoryFilter(admin.SimpleListFilter):
     title = 'Inventory'
