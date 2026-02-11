@@ -13,7 +13,6 @@ def say_hello(request):
 
 
 def firstapp(request):
-
     return render(request, 'playground/links.html')
 
 
