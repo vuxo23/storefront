@@ -7,7 +7,7 @@ class Promotion(models.Model):
 class Collection(models.Model):
     title= models.CharField(max_length=255)
     featured_product = models.ForeignKey('Product', on_delete=models.SET_NULL, null= True, related_name='+' )
-    
+
     def __str__(self) -> str:
         return self.title
     
@@ -19,7 +19,7 @@ class Collection(models.Model):
 
 
 class Product(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(default="-")
     description = models.TextField(null = True, blank=True)
     unit_price = models.DecimalField(
@@ -98,6 +98,12 @@ class Address(models.Model):
     city = models.CharField(max_length=255)
     zip = models.CharField(max_length=10)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    
+class Review(models.Model):
+    product =models.ForeignKey(Product, on_delete= models.CASCADE, related_name='reviews')
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    date = models.DateField(auto_now_add=True)
     
     
     
