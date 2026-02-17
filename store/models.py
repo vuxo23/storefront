@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from uuid import uuid4
 class Promotion(models.Model):
     description = models.CharField(max_length=255)
     discount = models.FloatField()
@@ -29,7 +30,6 @@ class Product(models.Model):
     inventory = models.IntegerField(validators=[MinValueValidator(0)])
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT, related_name='products')
-
     promotions = models.ManyToManyField(Promotion, blank = True)
     
     def __str__(self) -> str:
@@ -86,12 +86,15 @@ class OrderItem(models.Model):
     
 
 class Cart(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
     created_at= models.DateTimeField(auto_now=True)
 
 class CartItem(models.Model):
     quantity = models.PositiveSmallIntegerField()
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)  
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items') 
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = [['cart', 'product']]
 
 class Address(models.Model):
     street = models.CharField(max_length=255)

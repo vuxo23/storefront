@@ -17,12 +17,12 @@ class CollectionSerializer(serializers.ModelSerializer):
     
     
 class ProductSerializer(serializers.ModelSerializer):
+    price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
     class Meta:
         model= Product
         fields = ['id', 'title', 'description', 'slug', 'unit_price', 'inventory',  'price_with_tax', 'collection']
         
-    price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
-    
+
     def calculate_tax(self, product: Product):
         return product.unit_price * Decimal(1.1)
     
@@ -47,14 +47,33 @@ class ReviewSerializer(serializers.ModelSerializer):
         product_id = self.context['product_id']
         return Review.objects.create(product_id= product_id, **validated_data)
     
-class CartSerializer(serializers.ModelSerializer):
+class simpleProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cart
-        fields = ['id', 'created_at']
-        
-
+        model = Product
+        fields = ['id', 'title', 'unit_price']
+    
 class CartItemSerializer(serializers.ModelSerializer):
+    product = simpleProductSerializer()
+    total_price = serializers.SerializerMethodField(method_name = 'get_total_price')
     class Meta:
         model = CartItem
-        fields = ['id', 'product', 'quantity', 'cart']
+        fields = ['id', 'product', 'quantity', 'total_price']
+    
+    def get_total_price(self, cart_Item: CartItem):
+        
+        return cart_Item.quantity * cart_Item.product.unit_price
+    
+class CartSerializer(serializers.ModelSerializer):
+    id = serializers.UUIDField(read_only = True)
+    items = CartItemSerializer(many =True, read_only=True)
+    total_price = serializers.SerializerMethodField(method_name='get_total_price')
+    
+    def get_total_price(self, cart: Cart):
+        total = 0
+        for item in cart.items.all():  # loops through each CartItem in the cart
+            total += item.quantity * item.product.unit_price
+        return total
+    class Meta:
+        model = Cart
+        fields = ['id', 'items', 'total_price']
         
