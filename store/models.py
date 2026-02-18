@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.core.validators import MinValueValidator
 from uuid import uuid4
 from django.conf import settings
+from rest_framework import permissions
 class Promotion(models.Model):
     description = models.CharField(max_length=255)
     discount = models.FloatField()
@@ -68,6 +69,9 @@ class Customer(models.Model):
     
     class Meta:
         ordering = ['user__first_name' , 'user__last_name']
+        permissions = [
+            ('view_history', 'Can view history')
+        ]
 
 class Order(models.Model):
     PAYMENT_Pending = 'P'
