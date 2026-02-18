@@ -90,6 +90,7 @@ class Order(models.Model):
     
     class Meta:
         permissions = [
+
             ('cancel_order', 'can cancel order')
         ]
     
@@ -99,7 +100,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='OrderItem')
     quantity = models.PositiveSmallIntegerField()
     unit_price = models.DecimalField(max_digits=6, decimal_places=2)
-    order = models.ForeignKey(Order, on_delete=models.PROTECT)
+    order = models.ForeignKey(Order, on_delete=models.PROTECT, related_name='items')
     
     
     
