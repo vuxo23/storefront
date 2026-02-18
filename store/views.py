@@ -64,7 +64,7 @@ class CustomerViewSet(ModelViewSet):
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes = [IsAuthenticated])
     def me ( self, request):
-        (customer, created) = Customer.objects.get_or_create(user_id=request.user.id)
+        customer= Customer.objects.get(user_id=request.user.id)
         if request.method == 'GET':
             serializer = CustomerSerializer(customer)
             return Response(serializer.data)
@@ -105,7 +105,7 @@ class cartItemViewSet(ModelViewSet):
         return CartItem.objects.filter(cart_id= self.kwargs['cart_pk']).select_related('product')
     
 class OrderViewSet (ModelViewSet):
-    http_method_names = ['get', 'patch', 'delete', 'head', 'options']
+    http_method_names = ['get', 'patch', 'post', 'delete', 'head', 'options']
     def get_permissions(self):
         if self.request.method in ['PUT', 'PATCH', 'DELETE']:
             return [IsAdminUser()]
@@ -133,6 +133,5 @@ class OrderViewSet (ModelViewSet):
         user= self.request.user
         if user.is_staff:
             return Order.objects.all()
-        (customer_id, created) = Customer.objects.only('id').get_or_create(user_id= user.id)
+        customer_id= Customer.objects.only('id').get(user_id= user.id)
         return Order.objects.filter(customer_id =customer_id )
-    
