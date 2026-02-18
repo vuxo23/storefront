@@ -32,10 +32,10 @@ class PromotionSerializer(serializers.ModelSerializer):
         fields = ['id', 'description', 'discount']
     
 class CustomerSerializer(serializers.ModelSerializer):
-    
+    user_id = serializers.IntegerField()
     class Meta:
         model= Customer
-        fields = ['id', 'first_name', 'last_name', 'email', 'phone', 'membership' ]
+        fields = ['id', 'user_id', 'birth_date', 'phone', 'membership' ]
         
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -107,3 +107,5 @@ class UpdateCartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ['quantity']
+        
+    
