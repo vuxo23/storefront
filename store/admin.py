@@ -61,7 +61,7 @@ class ProductAdmin(admin.ModelAdmin):
         )
     class Media:
         css = {
-            'all': ['styles.css']
+            'all': ['store/styles.css']
         }
 
 @admin.register(models.Customer)

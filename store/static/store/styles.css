@@ -1,6 +1,5 @@
 .thumbnail {
     width: 100px;
     height: 100px;
-    text-align: center;
     object-fit: cover;
 }
