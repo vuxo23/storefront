@@ -11,6 +11,7 @@ from .serializers import *;
 from .filters import ProductFilter
 from .pagination import DefaultPagination
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermissions
+from django.db.models import Count
 
 
 
@@ -37,7 +38,7 @@ class ProductViewSet(ModelViewSet):
             
 class CollectionViewSet(ModelViewSet):
     serializer_class = CollectionSerializer
-    queryset = Collection.objects.all()
+    queryset = Collection.objects.annotate(products_count=Count('products'))
     permission_classes = [IsAdminOrReadOnly]
     
     def destroy(self, request, *args, **kwargs):
