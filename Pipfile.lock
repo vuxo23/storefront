@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c4032dc6b110754517c51f76d569e56aad478f9892521e7bc4d3b4095568ff97"
+            "sha256": "dfafa2773f0f8011ee4a0a1eada548d6a87c6e124f11d29e16a26457d6e11af5"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -370,12 +370,12 @@
         },
         "django": {
             "hashes": [
-                "sha256:2e5974441491ddb34c3f13d5e7a9f97b07ba03bf70234c0a9c68b79bbb235bc3",
-                "sha256:90be765ee756af8a6cbd6693e56452404b5ad15294f4d5e40c0a55a0f4870fe1"
+                "sha256:9d58a7cb49244e74c8e161d5e403a46d6209f1009ba40f5a66d6aa0d0786a8f0",
+                "sha256:bc6d6872e98a2864c836e42edd644b362db311147dd5aa8d5b82ba7a032f5269"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.12'",
-            "version": "==6.0.3"
+            "version": "==6.0.5"
         },
         "django-cors-headers": {
             "hashes": [
@@ -403,6 +403,15 @@
             "index": "pypi",
             "markers": "python_version >= '3.10'",
             "version": "==25.2"
+        },
+        "django-redis": {
+            "hashes": [
+                "sha256:20bf0063a8abee567eb5f77f375143c32810c8700c0674ced34737f8de4e36c0",
+                "sha256:2d9cb12a20424a4c4dde082c6122f486628bae2d9c2bee4c0126a4de7fda00dd"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.9'",
+            "version": "==6.0.0"
         },
         "django-templated-mail": {
             "hashes": [
@@ -742,11 +751,11 @@
         },
         "tzdata": {
             "hashes": [
-                "sha256:4b1d2be7ac37ceafd7327b961aa3a54e467efbdb563a23655fbfe0d39cfc42a9",
-                "sha256:67658a1903c75917309e753fdc349ac0efd8c27db7a0cb406a25be4840f87f98"
+                "sha256:9173fde7d80d9018e02a662e168e5a2d04f87c41ea174b139fbef642eda62d10",
+                "sha256:bbe9af844f658da81a5f95019480da3a89415801f6cc966806612cc7169bffe7"
             ],
             "markers": "python_version >= '2'",
-            "version": "==2026.1"
+            "version": "==2026.2"
         },
         "tzlocal": {
             "hashes": [
