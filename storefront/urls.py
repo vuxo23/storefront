@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 import debug_toolbar
 from django.conf.urls.static import static
-from storefront.settings import dev
+from django.conf import settings
 
 admin.site.site_header = 'StoreFront Admin'
 
@@ -31,8 +31,8 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    
 ]
-if dev.DEBUG:
-    urlpatterns += static(dev.MEDIA_URL, document_root = dev.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]
