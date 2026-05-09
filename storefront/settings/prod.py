@@ -28,7 +28,7 @@ CACHES = {
     }
 }
 
-EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
-EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_LOGIN']
-EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
-EMAIL_PORT = os.environ['MAILGUN_SMTP_PORT']
+EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER', 'localhost')
+EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
+EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
+EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', 2525)
