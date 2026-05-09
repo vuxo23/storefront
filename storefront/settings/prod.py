@@ -32,3 +32,6 @@ EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER', 'localhost')
 EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
 EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
 EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', 2525)
+
+INSTALLED_APPS = [app for app in INSTALLED_APPS if app != 'silk']
+MIDDLEWARE = [m for m in MIDDLEWARE if 'silk' not in m]
