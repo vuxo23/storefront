@@ -11,7 +11,12 @@ ALLOWED_HOSTS = ['salesgame-prod-0d931d83aaf5.herokuapp.com']
 
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        **dj_database_url.config(),
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
+    }
 }
 
 REDIS_URL = os.environ.get('REDISCLOUD_URL', 'redis://localhost:6379/1')
