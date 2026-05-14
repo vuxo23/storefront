@@ -12,7 +12,7 @@ from .filters import ProductFilter
 from .pagination import DefaultPagination
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermissions
 from django.db.models import Count
-
+from django.http import JsonResponse
 
 
 class ProductViewSet(ModelViewSet):
@@ -24,7 +24,7 @@ class ProductViewSet(ModelViewSet):
     search_fields = ['title', 'description']
     ordering_fields = ['unit_price', 'last_update']
     pagination_class = DefaultPagination
-    permission_classes = [IsAdminOrReadOnly]
+
 
     
     def get_serializer_context(self):
